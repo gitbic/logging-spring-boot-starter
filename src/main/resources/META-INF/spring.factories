@@ -1,0 +1,4 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+ru.clevertec.starter.config.ModelMapperAutoConfiguration,\
+ru.clevertec.starter.service.UserService,\
+ru.clevertec.starter.config.LogMethodExecutionTimeAutoConfiguration
