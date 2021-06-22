@@ -4,7 +4,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.*;
-import ru.clevertec.starter.constants.Description;
 import ru.clevertec.starter.constants.LoggingMessage;
 
 import java.util.Arrays;
