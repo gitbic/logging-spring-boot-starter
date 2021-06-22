@@ -39,7 +39,7 @@ publishing {
     publications {
         mavenJava(MavenPublication) {
             groupId = 'ru.clevertec'
-            artifactId = 'starter'
+            artifactId = 'logging-spring-boot-starter'
             version = '1.0'
 
             from components.java

@@ -1,20 +1,19 @@
-package ru.clevertec.starter.aspect;
+package ru.clevertec.logging.starter.aspect;
 
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.*;
-import ru.clevertec.starter.constants.LoggingMessage;
+import ru.clevertec.logging.starter.constants.LoggingMessage;
+import ru.clevertec.logging.starter.constants.Pointcuts;
 
 import java.util.Arrays;
-
-import static ru.clevertec.starter.constants.Constants.COMMON_DEFAULT_POINTCUT;
 
 @Slf4j
 @Aspect
 public class LogMethodExecutionAspect {
 
-    @Pointcut(COMMON_DEFAULT_POINTCUT)
+    @Pointcut(Pointcuts.COMMON_DEFAULT_POINTCUT)
     public void getDefaultPointcut() {
     }
 

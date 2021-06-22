@@ -1,4 +1,4 @@
-package ru.clevertec.starter;
+package ru.clevertec.logging.starter;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

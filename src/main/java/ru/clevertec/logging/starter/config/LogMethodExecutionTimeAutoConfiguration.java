@@ -1,9 +1,9 @@
-package ru.clevertec.starter.config;
+package ru.clevertec.logging.starter.config;
 
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import ru.clevertec.starter.aspect.LogMethodExecutionAspect;
+import ru.clevertec.logging.starter.aspect.LogMethodExecutionAspect;
 
 @Configuration
 @ConditionalOnProperty(name = "logging-service.enabled", havingValue = "true", matchIfMissing = true)
