@@ -1,0 +1,10 @@
+{
+  "properties": [
+    {
+      "name": "logging-service.enabled",
+      "type": "java.lang.Boolean",
+      "defaultValue": true,
+      "description": "Enable logging service"
+    }
+  ]
+}

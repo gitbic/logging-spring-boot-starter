@@ -6,7 +6,7 @@ import org.springframework.context.annotation.Configuration;
 import ru.clevertec.starter.aspect.LogMethodExecutionAspect;
 
 @Configuration
-@ConditionalOnProperty(name = "logging.api.enabled", havingValue = "true", matchIfMissing = true)
+@ConditionalOnProperty(name = "logging-service.enabled", havingValue = "true", matchIfMissing = true)
 public class LogMethodExecutionTimeAutoConfiguration {
     @Bean
     public LogMethodExecutionAspect getLogMethodExecutionAspect(){

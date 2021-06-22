@@ -26,7 +26,7 @@ dependencies {
 
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'
-
+    annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
 
     compileOnly 'org.modelmapper:modelmapper:2.3.2'
 }
