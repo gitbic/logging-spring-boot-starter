@@ -1,4 +1,4 @@
-package ru.clevertec.logging.starter.constants;
+package ru.clevertec.logging.starter.config.constants;
 
 public class Pointcuts {
     public static final String CONTROLLER_POINTCUT = "execution(* ru.clevertec..*controller*..*(..))";

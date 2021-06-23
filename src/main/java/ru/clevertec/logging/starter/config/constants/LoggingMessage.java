@@ -1,4 +1,4 @@
-package ru.clevertec.logging.starter.constants;
+package ru.clevertec.logging.starter.config.constants;
 
 public class LoggingMessage {
 

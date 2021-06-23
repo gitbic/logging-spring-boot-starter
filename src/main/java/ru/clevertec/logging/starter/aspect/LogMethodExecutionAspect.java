@@ -4,8 +4,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.*;
-import ru.clevertec.logging.starter.constants.LoggingMessage;
-import ru.clevertec.logging.starter.constants.Pointcuts;
+import ru.clevertec.logging.starter.config.constants.LoggingMessage;
+import ru.clevertec.logging.starter.config.constants.Pointcuts;
 
 import java.util.Arrays;
 
