@@ -1,22 +1,26 @@
 package ru.clevertec.logging.starter.aspect;
 
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.*;
 import ru.clevertec.logging.starter.config.constants.LoggingMessage;
 import ru.clevertec.logging.starter.config.constants.Pointcuts;
+import ru.clevertec.logging.starter.config.properties.PointcutProperties;
 
 import java.util.Arrays;
 
 @Slf4j
 @Aspect
+@RequiredArgsConstructor
 public class LogMethodExecutionAspect {
+
+    private final PointcutProperties pointcutProperties;
 
     @Pointcut(Pointcuts.COMMON_DEFAULT_POINTCUT)
     public void getDefaultPointcut() {
     }
-
 
     @Before("getDefaultPointcut()")
     public void logMethodBeforeExecution(JoinPoint joinPoint) {
@@ -38,7 +42,7 @@ public class LogMethodExecutionAspect {
         final long startTime = System.currentTimeMillis();
         final Object proceed = joinPoint.proceed();
         final long methodExecutionTime = System.currentTimeMillis() - startTime;
-
+        System.out.println(pointcutProperties.getPointcuts());
         log.warn(LoggingMessage.DURING_METHOD_EXECUTION_MESSAGE,
                 joinPoint.getSignature().toString(), methodExecutionTime);
         return proceed;

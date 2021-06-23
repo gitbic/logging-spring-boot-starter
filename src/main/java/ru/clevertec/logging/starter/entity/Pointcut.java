@@ -1,4 +1,4 @@
-package ru.clevertec.logging.starter.config.entity;
+package ru.clevertec.logging.starter.entity;
 
 import lombok.Data;
 
@@ -7,6 +7,4 @@ public class Pointcut {
     private String pattern;
     private boolean enabled;
     private LoggingFormat loggingFormat;
-//    private String dateFormat;
-
 }

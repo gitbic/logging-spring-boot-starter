@@ -1,4 +1,4 @@
-package ru.clevertec.logging.starter.config.entity;
+package ru.clevertec.logging.starter.entity;
 
 import lombok.Data;
 

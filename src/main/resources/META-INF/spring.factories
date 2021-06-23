@@ -1,4 +1,4 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
 ru.clevertec.logging.starter.config.ModelMapperAutoConfiguration,\
-ru.clevertec.logging.starter.config.configuration.LogMethodExecutionConfiguration,\
-ru.clevertec.logging.starter.config.properties.PointcutProperties
+ru.clevertec.logging.starter.config.properties.PointcutProperties,\
+ru.clevertec.logging.starter.config.configuration.LogMethodExecutionConfiguration
