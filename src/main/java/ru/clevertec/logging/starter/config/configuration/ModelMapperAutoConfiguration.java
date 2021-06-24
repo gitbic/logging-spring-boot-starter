@@ -1,4 +1,4 @@
-package ru.clevertec.logging.starter.config;
+package ru.clevertec.logging.starter.config.configuration;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Bean;
@@ -11,4 +11,5 @@ public class ModelMapperAutoConfiguration {
     public ModelMapper modelMapper() {
         return new ModelMapper();
     }
+
 }
