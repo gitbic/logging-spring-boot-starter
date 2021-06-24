@@ -3,7 +3,7 @@ package ru.clevertec.logging.starter.entity;
 import lombok.Data;
 
 @Data
-public class LoggingFormat {
+public class ConfigurableLog {
     private String dateFormat;
     private boolean printArguments;
 }

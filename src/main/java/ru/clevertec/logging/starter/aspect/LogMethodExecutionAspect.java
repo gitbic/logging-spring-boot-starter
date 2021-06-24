@@ -21,7 +21,7 @@ public class LogMethodExecutionAspect {
         this.number = number;
     }
 
-    @Pointcut(Pointcuts.COMMON_DEFAULT_POINTCUT)
+    @Pointcut(Pointcuts.DEFAULT_POINTCUT)
     public void getPointcut() {
     }
 

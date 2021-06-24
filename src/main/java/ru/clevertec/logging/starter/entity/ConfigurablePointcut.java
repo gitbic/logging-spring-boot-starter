@@ -5,8 +5,8 @@ import lombok.Data;
 import java.util.List;
 
 @Data
-public class Pointcut {
+public class ConfigurablePointcut {
     private List<String> patterns;
     private boolean enabled;
-    private LoggingFormat loggingFormat;
+    private ConfigurableLog loggingFormat;
 }
