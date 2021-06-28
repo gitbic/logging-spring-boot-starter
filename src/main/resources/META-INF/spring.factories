@@ -1,8 +1,7 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
 ru.clevertec.logging.starter.config.configuration.ModelMapperAutoConfiguration,\
-ru.clevertec.logging.starter.config.configuration.MultipleBeansApplicationContextInitializer,\
-ru.clevertec.logging.starter.config.properties.PointcutProperties,\
-ru.clevertec.logging.starter.entity.Dragon
+ru.clevertec.logging.starter.config.configuration.MultipleBeansApplicationContextInitializer
+
 
 
 

@@ -5,7 +5,7 @@ import lombok.Data;
 import java.util.List;
 
 @Data
-public class LoggingService {
+public class LoggingServiceProperties {
     Boolean enabled;
     List<ConfigurablePointcut> pointcuts;
 }

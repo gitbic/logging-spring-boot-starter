@@ -5,5 +5,6 @@ import lombok.Data;
 @Data
 public class ConfigurableLog {
     private String dateFormat;
-    private boolean printArguments;
+    private boolean argumentPrints;
+    private boolean returnValuePrints;
 }
