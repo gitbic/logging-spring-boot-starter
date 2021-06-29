@@ -7,5 +7,5 @@ import java.util.List;
 @Data
 public class LoggingServiceProperties {
     Boolean enabled;
-    List<ConfigurablePointcut> pointcuts;
+    List<AspectProperties> aspectsProperties;
 }
