@@ -6,7 +6,7 @@ import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.*;
 import ru.clevertec.logging.starter.config.constants.LoggingMessage;
-import ru.clevertec.logging.starter.config.constants.Pointcuts;
+import ru.clevertec.logging.starter.config.constants.PointcutPattern;
 
 import java.util.Arrays;
 
@@ -21,7 +21,7 @@ public class LogMethodExecutionAspect {
         this.number = number;
     }
 
-    @Pointcut(Pointcuts.DEFAULT_POINTCUT)
+    @Pointcut(PointcutPattern.DEFAULT_POINTCUT)
     public void getPointcut() {
     }
 

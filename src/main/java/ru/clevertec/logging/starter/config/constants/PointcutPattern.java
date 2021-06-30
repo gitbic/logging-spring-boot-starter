@@ -1,6 +1,6 @@
 package ru.clevertec.logging.starter.config.constants;
 
-public class Pointcuts {
+public class PointcutPattern {
     public static final String CONTROLLER_POINTCUT = "execution(* ru.clevertec..*controller*..*(..))";
     public static final String SERVICE_POINTCUT = "execution(* ru.clevertec..*service*..*(..))";
     public static final String REPOSITORY_POINTCUT = "execution(* ru.clevertec..*repository*..*(..))";

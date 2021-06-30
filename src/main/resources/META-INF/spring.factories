@@ -2,6 +2,8 @@ org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
 ru.clevertec.logging.starter.config.configuration.ModelMapperAutoConfiguration,\
 ru.clevertec.logging.starter.config.configuration.AspectInitializer,\
 ru.clevertec.logging.starter.config.properties.loggingServiceConfig
+#ru.clevertec.logging.starter.entity.LoggingServiceProperties
+
 
 
 

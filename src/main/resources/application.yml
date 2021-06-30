@@ -1,2 +1,26 @@
 server:
   port: 9888
+
+defaultLoggingService:
+  enabled: on
+  aspectsProperties:
+
+    - enabled: on
+      patterns:
+        - execution(* ru.clevertec..*controller*..*(..))
+      loggingFormat:
+        dateFormat: HH:mm:ss.SSS
+        argumentPrints: true
+        returnValuePrints: true
+
+    - enabled: on
+      patterns:
+        - execution(* ru.clevertec..*repository*..*(..))
+        - execution(* ru.clevertec..*service*..*(..))
+      loggingFormat:
+        dateFormat: HH:mm:ss.SSS
+        argumentPrints: true
+        returnValuePrints: true
+
+
+
