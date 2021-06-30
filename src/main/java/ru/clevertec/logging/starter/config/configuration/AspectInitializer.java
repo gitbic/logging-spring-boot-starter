@@ -5,6 +5,7 @@ import lombok.SneakyThrows;
 import org.springframework.beans.factory.config.BeanFactoryPostProcessor;
 import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.boot.context.properties.bind.Binder;
 import org.springframework.context.annotation.Configuration;
 import ru.clevertec.logging.starter.entity.LoggingServiceProperties;
 //import ru.clevertec.logging.starter.entity.ServerProperties;
@@ -15,10 +16,11 @@ import ru.clevertec.logging.starter.entity.LoggingServiceProperties;
 public class AspectInitializer implements BeanFactoryPostProcessor {
 
 
+
     @SneakyThrows
     @Override
     public void postProcessBeanFactory(ConfigurableListableBeanFactory beanFactory)  {
-//        System.out.println(System.getProperty("user.dir"));
+
 
         LoggingServiceProperties loggingServiceProperties = beanFactory.getBean("loggingServiceProperties", LoggingServiceProperties.class);
         System.out.println(loggingServiceProperties);

@@ -1,5 +1,6 @@
 package ru.clevertec.logging.starter.entity;
 
+import lombok.Builder;
 import lombok.Data;
 
 import java.util.List;
