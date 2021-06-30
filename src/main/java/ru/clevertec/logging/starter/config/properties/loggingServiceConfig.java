@@ -40,14 +40,14 @@ public class loggingServiceConfig {
 
     @Bean
     public LoggingServiceProperties defaultLoggingServiceProperties() throws IOException {
-        File file = new File("d:/repo/logging-aop-boot-starter/logging-spring-boot-starter/src/main/resources/application.yml"); // todo файл может быть другим
+        File file = new File( "d:/repo/logging-aop-boot-starter/logging-spring-boot-starter/src/main/resources/application.yml"); // todo файл может быть другим
         System.out.println("file: " + file + " exist: " + file.exists());
 
         ObjectMapper objectMapper = new ObjectMapper(new YAMLFactory());
 
         Map<String, Object> applicationYmlMap = objectMapper.readValue(file, new TypeReference<Map<String, Object>>() {
         });
-//        System.out.println(applicationYmlMap);
+        System.out.println(applicationYmlMap);
 
         Object loggingServicePropertiesMap = applicationYmlMap.get(Constants.DEFAULT_LOGGING_SERVICE_PROPERTY_NAME);
 //        System.out.println(loggingServicePropertiesMap);

@@ -18,14 +18,12 @@ public class AspectInitializer implements BeanFactoryPostProcessor {
     @SneakyThrows
     @Override
     public void postProcessBeanFactory(ConfigurableListableBeanFactory beanFactory)  {
-
+//        System.out.println(System.getProperty("user.dir"));
 
         LoggingServiceProperties loggingServiceProperties = beanFactory.getBean("loggingServiceProperties", LoggingServiceProperties.class);
-//        LoggingServiceProperties loggingServiceProperties = ConfigurationReader.getLoggingServiceProperties(Constants.LOGGING_SERVICE_PROPERTY_NAME);
         System.out.println(loggingServiceProperties);
 
         LoggingServiceProperties defaultLoggingServiceProperties = beanFactory.getBean("defaultLoggingServiceProperties", LoggingServiceProperties.class);
-//        LoggingServiceProperties defaultLoggingServiceProperties = ConfigurationReader.getLoggingServiceProperties(Constants.DEFAULT_LOGGING_SERVICE_PROPERTY_NAME);
         System.out.println(defaultLoggingServiceProperties);
 
 
