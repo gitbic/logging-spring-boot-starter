@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 
 @Data
-//@Configuration
+//@Component
 //@ConfigurationProperties("default-logging-service")
 public class LoggingServiceProperties {
     Boolean enabled;
