@@ -41,8 +41,8 @@ public class loggingServiceConfig {
 
         AspectProperties controllerAspectProperties = AspectProperties.builder()
                 .enabled(true)
-                .layer(ApiLayer.CONTROLLER.toString().toLowerCase())
-                .pattern(PointcutPattern.CONTROLLER_POINTCUT)
+                .layer(ApiLayer.CONTROLLER.getLayerName())
+                .pattern(ApiLayer.CONTROLLER.getPointcutPattern())
                 .loggingFormat(controllerLoggingFormat)
                 .build();
 
@@ -54,8 +54,8 @@ public class loggingServiceConfig {
 
         AspectProperties serviceAspectProperties = AspectProperties.builder()
                 .enabled(true)
-                .layer(ApiLayer.SERVICE.toString().toLowerCase())
-                .pattern(PointcutPattern.SERVICE_POINTCUT)
+                .layer(ApiLayer.SERVICE.getLayerName())
+                .pattern(ApiLayer.SERVICE.getPointcutPattern())
                 .loggingFormat(serviceLoggingFormat)
                 .build();
 
