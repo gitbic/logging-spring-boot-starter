@@ -37,6 +37,9 @@ public class AspectInitializer implements BeanFactoryPostProcessor, EnvironmentA
         System.out.println(defaultLoggingServiceProperties);
 
 
+
+
+
         BindResult<LoggingServiceProperties> bindResult = Binder.get(environment)
                 .bind("logging-service", LoggingServiceProperties.class);
         LoggingServiceProperties loggingServiceProperties = bindResult.get();

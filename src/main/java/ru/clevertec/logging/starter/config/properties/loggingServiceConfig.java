@@ -51,35 +51,36 @@ public class loggingServiceConfig {
     @Bean
     public LoggingServiceProperties defaultLoggingServiceProperties() throws IOException {
 
-        LoggingFormat controllerLoggingFormat = new LoggingFormat();
-        controllerLoggingFormat.setDateFormat(Constants.DEFAULT_DATE_TIME_FORMAT);
-        controllerLoggingFormat.setArgumentPrints(true);
-        controllerLoggingFormat.setReturnValuePrints(true);
+        LoggingFormat controllerLoggingFormat = LoggingFormat.builder()
+                .dateFormat(Constants.DEFAULT_DATE_TIME_FORMAT)
+                .argumentPrints(true)
+                .returnValuePrints(true)
+                .build();
 
-        AspectProperties controllerAspectProperties = new AspectProperties();
-        controllerAspectProperties.setEnabled(true);
-        controllerAspectProperties.setLoggingFormat(controllerLoggingFormat);
-        controllerAspectProperties.setPatterns(new ArrayList<>(Collections.singletonList(PointcutPattern.CONTROLLER_POINTCUT)));
 
-        LoggingFormat serviceLoggingFormat = new LoggingFormat();
-        serviceLoggingFormat.setDateFormat(Constants.DEFAULT_DATE_TIME_FORMAT);
-        serviceLoggingFormat.setArgumentPrints(true);
-        serviceLoggingFormat.setReturnValuePrints(true);
+        AspectProperties controllerAspectProperties = AspectProperties.builder()
+                .enabled(true)
+                .patterns(new ArrayList<>(Collections.singletonList(PointcutPattern.CONTROLLER_POINTCUT)))
+                .loggingFormat(controllerLoggingFormat)
+                .build();
 
-        AspectProperties serviceAspectProperties = new AspectProperties();
-        serviceAspectProperties.setEnabled(true);
-        serviceAspectProperties.setLoggingFormat(serviceLoggingFormat);
-        serviceAspectProperties.setPatterns(new ArrayList<>(Arrays.asList(PointcutPattern.SERVICE_POINTCUT, PointcutPattern.REPOSITORY_POINTCUT)));
+        LoggingFormat serviceLoggingFormat = LoggingFormat.builder()
+                .dateFormat(Constants.DEFAULT_DATE_TIME_FORMAT)
+                .argumentPrints(true)
+                .returnValuePrints(true)
+                .build();
+
+        AspectProperties serviceAspectProperties = AspectProperties.builder()
+                .enabled(true)
+                .patterns(new ArrayList<>(Arrays.asList(PointcutPattern.SERVICE_POINTCUT, PointcutPattern.REPOSITORY_POINTCUT)))
+                .loggingFormat(serviceLoggingFormat)
+                .build();
 
         List<AspectProperties> aspectsProperties = new ArrayList<>();
         aspectsProperties.add(controllerAspectProperties);
         aspectsProperties.add(serviceAspectProperties);
 
-        LoggingServiceProperties loggingServiceProperties = new LoggingServiceProperties();
-        loggingServiceProperties.setEnabled(true);
-        loggingServiceProperties.setAspectsProperties(aspectsProperties);
-
-        return loggingServiceProperties;
+        return new LoggingServiceProperties(true, aspectsProperties);
     }
 
 //    @Bean
