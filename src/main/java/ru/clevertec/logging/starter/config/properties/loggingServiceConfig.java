@@ -30,22 +30,22 @@ import java.util.*;
 public class loggingServiceConfig {
 
 
-    @Bean
-    public LoggingServiceProperties loggingServiceProperties() throws IOException {
-        File file = new File(Constants.APPLICATION_YML_FILE_PATH); // todo файл может быть другим
-        ObjectMapper objectMapper = new ObjectMapper(new YAMLFactory());
-        Map<String, Object> applicationYmlMap = objectMapper.readValue(file, new TypeReference<Map<String, Object>>() {
-        });
-        Object loggingServicePropertiesMap = applicationYmlMap.get(Constants.LOGGING_SERVICE_PROPERTY_NAME);
-        LoggingServiceProperties loggingServiceProperties = objectMapper.convertValue(loggingServicePropertiesMap, LoggingServiceProperties.class);
-
-        System.out.println("file: " + file + " exist: " + file.exists());
-        System.out.println(applicationYmlMap);
-        System.out.println(loggingServicePropertiesMap);
-        System.out.println(loggingServiceProperties);
-
-        return loggingServiceProperties;
-    }
+//    @Bean
+//    public LoggingServiceProperties loggingServiceProperties() throws IOException {
+//        File file = new File(Constants.APPLICATION_YML_FILE_PATH); // todo файл может быть другим
+//        ObjectMapper objectMapper = new ObjectMapper(new YAMLFactory());
+//        Map<String, Object> applicationYmlMap = objectMapper.readValue(file, new TypeReference<Map<String, Object>>() {
+//        });
+//        Object loggingServicePropertiesMap = applicationYmlMap.get(Constants.LOGGING_SERVICE_PROPERTY_NAME);
+//        LoggingServiceProperties loggingServiceProperties = objectMapper.convertValue(loggingServicePropertiesMap, LoggingServiceProperties.class);
+//
+//        System.out.println("file: " + file + " exist: " + file.exists());
+////        System.out.println(applicationYmlMap);
+////        System.out.println(loggingServicePropertiesMap);
+////        System.out.println(loggingServiceProperties);
+//
+//        return loggingServiceProperties;
+//    }
 
 
     @Bean
@@ -62,14 +62,14 @@ public class loggingServiceConfig {
         controllerAspectProperties.setPatterns(new ArrayList<>(Collections.singletonList(PointcutPattern.CONTROLLER_POINTCUT)));
 
         LoggingFormat serviceLoggingFormat = new LoggingFormat();
-        controllerLoggingFormat.setDateFormat(Constants.DEFAULT_DATE_TIME_FORMAT);
-        controllerLoggingFormat.setArgumentPrints(true);
-        controllerLoggingFormat.setReturnValuePrints(true);
+        serviceLoggingFormat.setDateFormat(Constants.DEFAULT_DATE_TIME_FORMAT);
+        serviceLoggingFormat.setArgumentPrints(true);
+        serviceLoggingFormat.setReturnValuePrints(true);
 
         AspectProperties serviceAspectProperties = new AspectProperties();
-        controllerAspectProperties.setEnabled(true);
-        controllerAspectProperties.setLoggingFormat(serviceLoggingFormat);
-        controllerAspectProperties.setPatterns(new ArrayList<>(Arrays.asList(PointcutPattern.SERVICE_POINTCUT, PointcutPattern.REPOSITORY_POINTCUT)));
+        serviceAspectProperties.setEnabled(true);
+        serviceAspectProperties.setLoggingFormat(serviceLoggingFormat);
+        serviceAspectProperties.setPatterns(new ArrayList<>(Arrays.asList(PointcutPattern.SERVICE_POINTCUT, PointcutPattern.REPOSITORY_POINTCUT)));
 
         List<AspectProperties> aspectsProperties = new ArrayList<>();
         aspectsProperties.add(controllerAspectProperties);
@@ -84,16 +84,15 @@ public class loggingServiceConfig {
 
 //    @Bean
 //    public LoggingServiceProperties defaultLoggingServiceProperties() throws IOException {
-////        File file = new File( "d:/repo/logging-aop-boot-starter/logging-spring-boot-starter/src/main/resources/application.yml"); // todo файл может быть другим
-//        File file = new File( "src/main/resources/META-INF/application.yml"); // todo файл может быть другим
-////        File file = new File( "application.yml"); // todo файл может быть другим
-//        System.out.println("file: " + file + " exist: " + file.exists());
+//        File file = new File( "d:/repo/logging-aop-boot-starter/logging-spring-boot-starter/src/main/resources/application.yml"); // todo файл может быть другим
+////        File file = new File( "src/main/resources/META-INF/application.yml"); // todo файл может быть другим
+////        System.out.println("file: " + file + " exist: " + file.exists());
 //
 //        ObjectMapper objectMapper = new ObjectMapper(new YAMLFactory());
 //
 //        Map<String, Object> applicationYmlMap = objectMapper.readValue(file, new TypeReference<Map<String, Object>>() {
 //        });
-//        System.out.println(applicationYmlMap);
+////        System.out.println(applicationYmlMap);
 //
 //        Object loggingServicePropertiesMap = applicationYmlMap.get(Constants.DEFAULT_LOGGING_SERVICE_PROPERTY_NAME);
 ////        System.out.println(loggingServicePropertiesMap);
