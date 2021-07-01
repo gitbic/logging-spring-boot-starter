@@ -7,6 +7,7 @@ import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.*;
 import ru.clevertec.logging.starter.config.constants.LoggingMessage;
 import ru.clevertec.logging.starter.config.constants.PointcutPattern;
+import ru.clevertec.logging.starter.entity.AspectProperties;
 
 import java.util.Arrays;
 
@@ -15,11 +16,8 @@ import java.util.Arrays;
 @RequiredArgsConstructor
 public class LogMethodExecutionAspect {
 
-   private String number;
+    private final AspectProperties aspectProperties;
 
-    public LogMethodExecutionAspect(String number) {
-        this.number = number;
-    }
 
     @Pointcut(PointcutPattern.DEFAULT_POINTCUT)
     public void getPointcut() {
@@ -27,7 +25,7 @@ public class LogMethodExecutionAspect {
 
     @Before("getPointcut()")
     public void logMethodBeforeExecution(JoinPoint joinPoint) {
-        System.out.println(number);
+        System.out.println(aspectProperties);
         log.warn(LoggingMessage.BEFORE_METHOD_EXECUTION_MESSAGE,
                 joinPoint.getSignature().toString(), Arrays.toString(joinPoint.getArgs()));
     }

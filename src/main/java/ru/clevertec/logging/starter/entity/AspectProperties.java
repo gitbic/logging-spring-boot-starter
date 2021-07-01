@@ -12,7 +12,8 @@ import java.util.List;
 @AllArgsConstructor
 @Builder(toBuilder = true)
 public class AspectProperties {
-    private List<String> patterns;
+    private String pattern;
+    private String layer;
     private boolean enabled;
     private LoggingFormat loggingFormat;
 }

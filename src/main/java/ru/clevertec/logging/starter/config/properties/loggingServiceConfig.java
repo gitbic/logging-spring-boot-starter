@@ -19,6 +19,7 @@ import ru.clevertec.logging.starter.entity.AspectProperties;
 import ru.clevertec.logging.starter.entity.LoggingFormat;
 import ru.clevertec.logging.starter.entity.LoggingServiceProperties;
 import ru.clevertec.logging.starter.entity.ServerProperties;
+import ru.clevertec.logging.starter.enums.ApiLayer;
 
 
 import java.io.File;
@@ -28,6 +29,43 @@ import java.util.*;
 @Configuration
 
 public class loggingServiceConfig {
+
+    @Bean
+    public LoggingServiceProperties defaultLoggingServiceProperties()  {
+
+        LoggingFormat controllerLoggingFormat = LoggingFormat.builder()
+                .dateFormat(Constants.DEFAULT_DATE_TIME_FORMAT)
+                .argumentPrints(true)
+                .returnValuePrints(true)
+                .build();
+
+        AspectProperties controllerAspectProperties = AspectProperties.builder()
+                .enabled(true)
+                .layer(ApiLayer.CONTROLLER.toString().toLowerCase())
+                .pattern(PointcutPattern.CONTROLLER_POINTCUT)
+                .loggingFormat(controllerLoggingFormat)
+                .build();
+
+        LoggingFormat serviceLoggingFormat = LoggingFormat.builder()
+                .dateFormat(Constants.DEFAULT_DATE_TIME_FORMAT)
+                .argumentPrints(true)
+                .returnValuePrints(true)
+                .build();
+
+        AspectProperties serviceAspectProperties = AspectProperties.builder()
+                .enabled(true)
+                .layer(ApiLayer.SERVICE.toString().toLowerCase())
+                .pattern(PointcutPattern.SERVICE_POINTCUT)
+                .loggingFormat(serviceLoggingFormat)
+                .build();
+
+        List<AspectProperties> aspectsProperties = new ArrayList<>();
+        aspectsProperties.add(controllerAspectProperties);
+        aspectsProperties.add(serviceAspectProperties);
+
+        return new LoggingServiceProperties(true, aspectsProperties);
+    }
+
 
 
 //    @Bean
@@ -47,41 +85,6 @@ public class loggingServiceConfig {
 //        return loggingServiceProperties;
 //    }
 
-
-    @Bean
-    public LoggingServiceProperties defaultLoggingServiceProperties() throws IOException {
-
-        LoggingFormat controllerLoggingFormat = LoggingFormat.builder()
-                .dateFormat(Constants.DEFAULT_DATE_TIME_FORMAT)
-                .argumentPrints(true)
-                .returnValuePrints(true)
-                .build();
-
-
-        AspectProperties controllerAspectProperties = AspectProperties.builder()
-                .enabled(true)
-                .patterns(new ArrayList<>(Collections.singletonList(PointcutPattern.CONTROLLER_POINTCUT)))
-                .loggingFormat(controllerLoggingFormat)
-                .build();
-
-        LoggingFormat serviceLoggingFormat = LoggingFormat.builder()
-                .dateFormat(Constants.DEFAULT_DATE_TIME_FORMAT)
-                .argumentPrints(true)
-                .returnValuePrints(true)
-                .build();
-
-        AspectProperties serviceAspectProperties = AspectProperties.builder()
-                .enabled(true)
-                .patterns(new ArrayList<>(Arrays.asList(PointcutPattern.SERVICE_POINTCUT, PointcutPattern.REPOSITORY_POINTCUT)))
-                .loggingFormat(serviceLoggingFormat)
-                .build();
-
-        List<AspectProperties> aspectsProperties = new ArrayList<>();
-        aspectsProperties.add(controllerAspectProperties);
-        aspectsProperties.add(serviceAspectProperties);
-
-        return new LoggingServiceProperties(true, aspectsProperties);
-    }
 
 //    @Bean
 //    public LoggingServiceProperties defaultLoggingServiceProperties() throws IOException {

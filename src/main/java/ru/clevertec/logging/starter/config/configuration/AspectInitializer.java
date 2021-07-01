@@ -1,23 +1,22 @@
 package ru.clevertec.logging.starter.config.configuration;
 
-import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import org.springframework.beans.factory.config.BeanFactoryPostProcessor;
 import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
-import org.springframework.boot.autoconfigure.jackson.JacksonProperties;
 import org.springframework.boot.context.properties.bind.BindResult;
 import org.springframework.boot.context.properties.bind.Binder;
 import org.springframework.context.EnvironmentAware;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
+import ru.clevertec.logging.starter.aspect.LogMethodExecutionAspect;
+import ru.clevertec.logging.starter.config.constants.Constants;
 import ru.clevertec.logging.starter.entity.LoggingServiceProperties;
-import ru.clevertec.logging.starter.entity.ServerProperties;
-//import ru.clevertec.logging.starter.entity.ServerProperties;
+
 
 @Configuration
 //@RequiredArgsConstructor
-@ConditionalOnProperty(name = "logging-service.enabled", havingValue = "true", matchIfMissing = true)
+@ConditionalOnProperty(name = Constants.LOGGING_SERVICE_ASPECT_ENABLED_PROPERTY, havingValue = "true", matchIfMissing = true)
 public class AspectInitializer implements BeanFactoryPostProcessor, EnvironmentAware {
 
     private Environment environment;
@@ -31,19 +30,21 @@ public class AspectInitializer implements BeanFactoryPostProcessor, EnvironmentA
     @Override
     public void postProcessBeanFactory(ConfigurableListableBeanFactory beanFactory)  {
 
-
-
-        LoggingServiceProperties defaultLoggingServiceProperties = beanFactory.getBean("defaultLoggingServiceProperties", LoggingServiceProperties.class);
+        LoggingServiceProperties defaultLoggingServiceProperties =
+                beanFactory.getBean(Constants.DEFAULT_LOGGING_SERVICE_PROPERTIES_BEAN_NAME, LoggingServiceProperties.class);
         System.out.println(defaultLoggingServiceProperties);
 
-
-
-
-
         BindResult<LoggingServiceProperties> bindResult = Binder.get(environment)
-                .bind("logging-service", LoggingServiceProperties.class);
+                .bind(Constants.LOGGING_SERVICE_PROPERTY_NAME, LoggingServiceProperties.class);
         LoggingServiceProperties loggingServiceProperties = bindResult.get();
         System.out.println(loggingServiceProperties);
+
+        int AspectBeanNumber = 1;
+
+
+
+
+        beanFactory.registerSingleton("LogMethodExecutionAspect1", new LogMethodExecutionAspect(defaultLoggingServiceProperties.getAspectsProperties().get(0)));
 
 
     }

@@ -6,7 +6,8 @@ public class Constants {
     public static final String APPLICATION_YML_FILE_PATH = "src/main/resources/application.yml";
     public static final String LOGGING_SERVICE_PROPERTY_NAME = "logging-service";
     public static final String DEFAULT_LOGGING_SERVICE_PROPERTY_NAME = "default-logging-service";
-
+    public static final String DEFAULT_LOGGING_SERVICE_PROPERTIES_BEAN_NAME = "defaultLoggingServiceProperties";
+    public static final String LOGGING_SERVICE_ASPECT_ENABLED_PROPERTY = "logging-service.enabled";
 
 
 }
