@@ -28,7 +28,7 @@ import java.util.*;
 
 @Configuration
 
-public class loggingServiceConfig {
+public class loggingServicePropertiesConfig {
 
     @Bean
     public LoggingServiceProperties defaultLoggingServiceProperties()  {

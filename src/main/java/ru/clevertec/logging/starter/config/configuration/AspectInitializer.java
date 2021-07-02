@@ -11,6 +11,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
 import ru.clevertec.logging.starter.aspect.LogMethodExecutionAspect;
 import ru.clevertec.logging.starter.config.constants.Constants;
+import ru.clevertec.logging.starter.entity.AspectProperties;
 import ru.clevertec.logging.starter.entity.LoggingServiceProperties;
 
 
@@ -28,7 +29,7 @@ public class AspectInitializer implements BeanFactoryPostProcessor, EnvironmentA
 
     @SneakyThrows
     @Override
-    public void postProcessBeanFactory(ConfigurableListableBeanFactory beanFactory)  {
+    public void postProcessBeanFactory(ConfigurableListableBeanFactory beanFactory) {
 
         LoggingServiceProperties defaultLoggingServiceProperties =
                 beanFactory.getBean(Constants.DEFAULT_LOGGING_SERVICE_PROPERTIES_BEAN_NAME, LoggingServiceProperties.class);
@@ -39,12 +40,19 @@ public class AspectInitializer implements BeanFactoryPostProcessor, EnvironmentA
         LoggingServiceProperties loggingServiceProperties = bindResult.get();
         System.out.println(loggingServiceProperties);
 
-        int AspectBeanNumber = 1;
+        int aspectBeanNumber = 1;
+        for (AspectProperties aspectProperties : defaultLoggingServiceProperties.getAspectsProperties()) {
+            if (!aspectProperties.isEnabled()) return;
+
+            beanFactory.registerSingleton(LogMethodExecutionAspect.class.getSimpleName() + aspectBeanNumber++,
+                    new LogMethodExecutionAspect(aspectProperties));
+        }
+//        System.out.println("=================");
+//        beanFactory.registerSingleton(LogMethodExecutionAspect.class.getSimpleName() ,
+//                new LogMethodExecutionAspect(loggingServiceProperties.getAspectsProperties().get(0)));
 
 
 
-
-        beanFactory.registerSingleton("LogMethodExecutionAspect1", new LogMethodExecutionAspect(defaultLoggingServiceProperties.getAspectsProperties().get(0)));
 
 
     }

@@ -8,7 +8,7 @@ public enum ApiLayer {
     REPOSITORY(PointcutPattern.REPOSITORY_POINTCUT),
     ALL(PointcutPattern.ALL_DIRECTORY_POINTCUT);
 
-    private String pointcutPattern;
+    private final String pointcutPattern;
 
     ApiLayer(String pointcutPattern) {
         this.pointcutPattern = pointcutPattern;
