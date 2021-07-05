@@ -1,15 +1,12 @@
 package ru.clevertec.logging.starter.aspect;
 
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.*;
-import org.springframework.aop.support.AopUtils;
 import ru.clevertec.logging.starter.config.constants.LoggingMessage;
 import ru.clevertec.logging.starter.config.constants.PointcutPattern;
 import ru.clevertec.logging.starter.entity.AspectProperties;
-import ru.clevertec.logging.starter.enums.ApiLayer;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
@@ -19,20 +16,27 @@ import java.lang.reflect.Proxy;
 import java.util.Arrays;
 import java.util.Map;
 
+
 @Slf4j
 @Aspect
-public class LogMethodExecutionAspect {
+public class LogMethodExecutionAspect0 {
 
     private final AspectProperties aspectProperties;
 
-    public LogMethodExecutionAspect(AspectProperties aspectProperties) throws NoSuchMethodException, IllegalAccessException, NoSuchFieldException {
+    public LogMethodExecutionAspect0(AspectProperties aspectProperties) throws NoSuchMethodException, IllegalAccessException, NoSuchFieldException {
         this.aspectProperties = aspectProperties;
-        changePointcut();
+//        changePointcut();
+        reflectThis();
     }
 
-    @Pointcut("")
-//    @Pointcut(PointcutPattern.DEFAULT_POINTCUT)
+//    @Pointcut("ru.clevertec.logging.starter.aspect.AspectPointcut.getControllerPointcut()")
+    @Pointcut(PointcutPattern.CONTROLLER_POINTCUT)
     public void getPointcut() {
+    }
+
+    public void reflectThis() {
+        Method[] declaredMethods = this.getClass().getDeclaredMethods();
+        System.out.println("declaredMethods: " + Arrays.toString(declaredMethods));
     }
 
     public void changePointcut() throws NoSuchMethodException, NoSuchFieldException, IllegalAccessException {
@@ -98,6 +102,5 @@ public class LogMethodExecutionAspect {
         log.error(LoggingMessage.AFTER_METHOD_THROWING_EXCEPTION_MESSAGE,
                 joinPoint.getSignature().toString(), exception.getMessage());
     }
-
 
 }
