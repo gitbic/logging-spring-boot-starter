@@ -3,10 +3,10 @@ package ru.clevertec.logging.starter.enums;
 import ru.clevertec.logging.starter.config.constants.PointcutPattern;
 
 public enum ApiLayer {
-    CONTROLLER(PointcutPattern.CONTROLLER_POINTCUT),
-    SERVICE(PointcutPattern.SERVICE_POINTCUT),
-    REPOSITORY(PointcutPattern.REPOSITORY_POINTCUT),
-    ALL(PointcutPattern.ALL_DIRECTORY_POINTCUT);
+    CONTROLLER(PointcutPattern.DEFAULT_CONTROLLER_POINTCUT),
+    SERVICE(PointcutPattern.DEFAULT_SERVICE_POINTCUT),
+    REPOSITORY(PointcutPattern.DEFAULT_REPOSITORY_POINTCUT),
+    ALL(PointcutPattern.DEFAULT_ALL_DIRECTORY_POINTCUT);
 
     private final String pointcutPattern;
 

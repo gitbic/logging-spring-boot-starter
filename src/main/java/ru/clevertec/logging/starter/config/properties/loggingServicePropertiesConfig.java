@@ -1,29 +1,14 @@
 package ru.clevertec.logging.starter.config.properties;
 
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
-import lombok.RequiredArgsConstructor;
-import org.springframework.beans.BeansException;
-import org.springframework.beans.factory.config.BeanFactoryPostProcessor;
-import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
-import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.boot.context.properties.bind.BindResult;
-import org.springframework.boot.context.properties.bind.Binder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.env.Environment;
 import ru.clevertec.logging.starter.config.constants.Constants;
-import ru.clevertec.logging.starter.config.constants.PointcutPattern;
 import ru.clevertec.logging.starter.entity.AspectProperties;
 import ru.clevertec.logging.starter.entity.LoggingFormat;
 import ru.clevertec.logging.starter.entity.LoggingServiceProperties;
-import ru.clevertec.logging.starter.entity.ServerProperties;
 import ru.clevertec.logging.starter.enums.ApiLayer;
 
 
-import java.io.File;
-import java.io.IOException;
 import java.util.*;
 
 @Configuration
@@ -37,6 +22,7 @@ public class loggingServicePropertiesConfig {
                 .dateFormat(Constants.DEFAULT_DATE_TIME_FORMAT)
                 .argumentPrints(true)
                 .returnValuePrints(true)
+                .methodExecutingTimePrints(true)
                 .build();
 
         AspectProperties controllerAspectProperties = AspectProperties.builder()
@@ -49,7 +35,8 @@ public class loggingServicePropertiesConfig {
         LoggingFormat serviceLoggingFormat = LoggingFormat.builder()
                 .dateFormat(Constants.DEFAULT_DATE_TIME_FORMAT)
                 .argumentPrints(true)
-                .returnValuePrints(true)
+                .returnValuePrints(false)
+                .methodExecutingTimePrints(false)
                 .build();
 
         AspectProperties serviceAspectProperties = AspectProperties.builder()

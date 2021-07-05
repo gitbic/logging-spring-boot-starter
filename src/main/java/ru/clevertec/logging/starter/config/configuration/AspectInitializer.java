@@ -1,6 +1,7 @@
 package ru.clevertec.logging.starter.config.configuration;
 
 import lombok.SneakyThrows;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.config.BeanFactoryPostProcessor;
 import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -40,18 +41,24 @@ public class AspectInitializer implements BeanFactoryPostProcessor, EnvironmentA
         LoggingServiceProperties loggingServiceProperties = bindResult.get();
         System.out.println(loggingServiceProperties);
 
-        int aspectBeanNumber = 1;
-        for (AspectProperties aspectProperties : defaultLoggingServiceProperties.getAspectsProperties()) {
-            if (!aspectProperties.isEnabled()) return;
+//        int aspectBeanNumber = 1;
+//        for (AspectProperties aspectProperties : defaultLoggingServiceProperties.getAspectsProperties()) {
+//            if (!aspectProperties.isEnabled()) return;
+//
+//            beanFactory.registerSingleton(LogMethodExecutionAspect.class.getSimpleName() + aspectBeanNumber++,
+//                    new LogMethodExecutionAspect(aspectProperties));
+//        }
 
-            beanFactory.registerSingleton(LogMethodExecutionAspect.class.getSimpleName() + aspectBeanNumber++,
-                    new LogMethodExecutionAspect(aspectProperties));
-        }
-//        System.out.println("=================");
-//        beanFactory.registerSingleton(LogMethodExecutionAspect.class.getSimpleName() ,
-//                new LogMethodExecutionAspect(loggingServiceProperties.getAspectsProperties().get(0)));
+        beanFactory.registerSingleton("LKnvja", new ModelMapper());
+
+        System.out.println("=================");
+
+        beanFactory.registerSingleton(LogMethodExecutionAspect.class.getSimpleName() + 2,
+                new LogMethodExecutionAspect(defaultLoggingServiceProperties.getAspectsProperties().get(1)));
 
 
+        beanFactory.registerSingleton(LogMethodExecutionAspect.class.getSimpleName() + 1,
+                new LogMethodExecutionAspect(defaultLoggingServiceProperties.getAspectsProperties().get(0)));
 
 
 

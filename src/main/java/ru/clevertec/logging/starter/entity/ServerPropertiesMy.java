@@ -7,6 +7,6 @@ import org.springframework.context.annotation.Configuration;
 @Data
 @Configuration
 @ConfigurationProperties("server")
-public class ServerProperties {
+public class ServerPropertiesMy {
     private final String port;
 }

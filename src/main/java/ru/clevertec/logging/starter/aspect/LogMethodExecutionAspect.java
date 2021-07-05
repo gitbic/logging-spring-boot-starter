@@ -30,8 +30,8 @@ public class LogMethodExecutionAspect {
         changePointcut();
     }
 
-//    @Pointcut("")
-    @Pointcut(PointcutPattern.DEFAULT_POINTCUT)
+        @Pointcut("")
+//    @Pointcut(PointcutPattern.DEFAULT_POINTCUT)
     public void getPointcut() {
     }
 
@@ -47,15 +47,16 @@ public class LogMethodExecutionAspect {
 
         Map<String, Object> memberValues = (Map<String, Object>) field.get(invocationHandler);
         memberValues.put("value", newPointcutPattern);
+        field.setAccessible(false);
 
         Pointcut newPointcut = getPointcutMethod.getAnnotation(Pointcut.class);
-        System.out.println("new pointcut value: " + newPointcut.value());
+        System.out.println("New pointcut value: " + newPointcut.value());
     }
 
     @Before("getPointcut()")
     public void logMethodBeforeExecution(JoinPoint joinPoint) throws NoSuchMethodException, IllegalAccessException, NoSuchFieldException {
 //        changePointcut();
-
+        log.warn("============= Layer: " + aspectProperties.getLayer() + "; Pattern: " + aspectProperties.getPattern());
         log.warn(LoggingMessage.BEFORE_METHOD_EXECUTION_MESSAGE,
                 joinPoint.getSignature().toString(), Arrays.toString(joinPoint.getArgs()));
     }
@@ -63,30 +64,27 @@ public class LogMethodExecutionAspect {
     @AfterReturning(pointcut = "getPointcut()", returning = "returningValues")
     public void logMethodAfterExecution(JoinPoint joinPoint, Object returningValues) {
 
+        if (aspectProperties.getLoggingFormat().isReturnValuePrints()) {
+            returningValues = "";
+            //!!!!!!!!!!!!!!
+        }
+
         log.warn(LoggingMessage.AFTER_METHOD_EXECUTION_MESSAGE,
                 joinPoint.getSignature().toString(), Arrays.toString(joinPoint.getArgs()), returningValues);
+
     }
 
     @Around("getPointcut()")
     public Object logMethodDuringExecution(ProceedingJoinPoint joinPoint) throws Throwable {
-
-//        String newPointcutPattern = aspectProperties.getPattern();
-//        Method getPointcutMethod = this.getClass().getDeclaredMethod("getPointcut");
-//        Pointcut pointcut = getPointcutMethod.getAnnotation(Pointcut.class);
-//        System.out.println(pointcut.value());
-//
-//        InvocationHandler invocationHandler = Proxy.getInvocationHandler(pointcut);
-//        Field field = invocationHandler.getClass().getDeclaredField("memberValues");
-//        field.setAccessible(true);
-//
-//        Map<String, Object> memberValues = (Map<String, Object>) field.get(invocationHandler);
-//        memberValues.put("value", newPointcutPattern);
-
-        final long startTime = System.currentTimeMillis();
         final Object proceed = joinPoint.proceed();
-        final long methodExecutionTime = System.currentTimeMillis() - startTime;
-        log.warn(LoggingMessage.DURING_METHOD_EXECUTION_MESSAGE,
-                joinPoint.getSignature().toString(), methodExecutionTime);
+
+        if (aspectProperties.getLoggingFormat().isMethodExecutingTimePrints()) {
+            final long startTime = System.currentTimeMillis();
+            final long methodExecutionTime = System.currentTimeMillis() - startTime;
+            log.warn(LoggingMessage.DURING_METHOD_EXECUTION_MESSAGE,
+                    joinPoint.getSignature().toString(), methodExecutionTime);
+        }
+
         return proceed;
     }
 
