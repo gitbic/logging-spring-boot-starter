@@ -41,24 +41,24 @@ public class AspectInitializer implements BeanFactoryPostProcessor, EnvironmentA
         LoggingServiceProperties loggingServiceProperties = bindResult.get();
         System.out.println(loggingServiceProperties);
 
-//        int aspectBeanNumber = 1;
-//        for (AspectProperties aspectProperties : defaultLoggingServiceProperties.getAspectsProperties()) {
-//            if (!aspectProperties.isEnabled()) return;
-//
-//            beanFactory.registerSingleton(LogMethodExecutionAspect.class.getSimpleName() + aspectBeanNumber++,
-//                    new LogMethodExecutionAspect(aspectProperties));
-//        }
+        int aspectBeanNumber = 1;
+        for (AspectProperties aspectProperties : defaultLoggingServiceProperties.getAspectsProperties()) {
+            if (!aspectProperties.isEnabled()) return;
+
+            beanFactory.registerSingleton(LogMethodExecutionAspect.class.getSimpleName() + aspectBeanNumber++,
+                    new LogMethodExecutionAspect(aspectProperties));
+        }
 
         beanFactory.registerSingleton("LKnvja", new ModelMapper());
 
         System.out.println("=================");
 
-        beanFactory.registerSingleton(LogMethodExecutionAspect.class.getSimpleName() + 2,
-                new LogMethodExecutionAspect(defaultLoggingServiceProperties.getAspectsProperties().get(1)));
-
-
-        beanFactory.registerSingleton(LogMethodExecutionAspect.class.getSimpleName() + 1,
-                new LogMethodExecutionAspect(defaultLoggingServiceProperties.getAspectsProperties().get(0)));
+//        beanFactory.registerSingleton(LogMethodExecutionAspect.class.getSimpleName() + 2,
+//                new LogMethodExecutionAspect(defaultLoggingServiceProperties.getAspectsProperties().get(1)));
+//
+//
+//        beanFactory.registerSingleton(LogMethodExecutionAspect.class.getSimpleName() + 1,
+//                new LogMethodExecutionAspect(defaultLoggingServiceProperties.getAspectsProperties().get(0)));
 
 
 

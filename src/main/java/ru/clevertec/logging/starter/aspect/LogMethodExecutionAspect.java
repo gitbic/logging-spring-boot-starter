@@ -30,24 +30,26 @@ public class LogMethodExecutionAspect {
         changePointcut();
     }
 
-        @Pointcut("")
+    @Pointcut("")
 //    @Pointcut(PointcutPattern.DEFAULT_POINTCUT)
     public void getPointcut() {
     }
 
-    private void changePointcut() throws NoSuchMethodException, NoSuchFieldException, IllegalAccessException {
+    public void changePointcut() throws NoSuchMethodException, NoSuchFieldException, IllegalAccessException {
         String newPointcutPattern = aspectProperties.getPattern();
+
         Method getPointcutMethod = this.getClass().getDeclaredMethod("getPointcut");
-        Pointcut pointcut = getPointcutMethod.getAnnotation(Pointcut.class);
-//        System.out.println("pointcut value: " + pointcut.value());
+        Annotation pointcut = getPointcutMethod.getAnnotation(Pointcut.class);
+//        System.out.println("Old pointcut value: " + pointcut.value());
 
         InvocationHandler invocationHandler = Proxy.getInvocationHandler(pointcut);
         Field field = invocationHandler.getClass().getDeclaredField("memberValues");
         field.setAccessible(true);
 
-        Map<String, Object> memberValues = (Map<String, Object>) field.get(invocationHandler);
-        memberValues.put("value", newPointcutPattern);
-        field.setAccessible(false);
+        Map<String, Object> annotationValues = (Map<String, Object>) field.get(invocationHandler);
+        System.out.println("Annotation value before: " + annotationValues);
+        annotationValues.put("value", newPointcutPattern);
+        System.out.println("Annotation value after: " + annotationValues);
 
         Pointcut newPointcut = getPointcutMethod.getAnnotation(Pointcut.class);
         System.out.println("New pointcut value: " + newPointcut.value());
@@ -55,8 +57,10 @@ public class LogMethodExecutionAspect {
 
     @Before("getPointcut()")
     public void logMethodBeforeExecution(JoinPoint joinPoint) throws NoSuchMethodException, IllegalAccessException, NoSuchFieldException {
-//        changePointcut();
-        log.warn("============= Layer: " + aspectProperties.getLayer() + "; Pattern: " + aspectProperties.getPattern());
+//        System.out.println(aspectProperties);
+        System.out.println("========= This class hash code: " + this.hashCode());
+        System.out.println("============= Layer: " + aspectProperties.getLayer() + "; Pattern: " + aspectProperties.getPattern());
+
         log.warn(LoggingMessage.BEFORE_METHOD_EXECUTION_MESSAGE,
                 joinPoint.getSignature().toString(), Arrays.toString(joinPoint.getArgs()));
     }
