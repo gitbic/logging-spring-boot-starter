@@ -20,16 +20,18 @@ public class BeanConfig implements BeanFactoryPostProcessor {
     @SneakyThrows
     @Override
     public void postProcessBeanFactory(ConfigurableListableBeanFactory beanFactory) throws BeansException {
-
-
-
         beanFactory.registerSingleton("LKnvja", new ModelMapper());
 
-        beanFactory.registerSingleton("myPrototype1", new MyPrototype("Hello"));
+
+
+//        beanFactory.registerSingleton("myPrototype1", new MyPrototype("Hello"));
 //        beanFactory.registerSingleton("myPrototype2", new MyPrototype("Bye"));
 
 
+        ObjectProvider<MyPrototype> myPrototypeProvider = beanFactory.getBeanProvider(MyPrototype.class);
+        final MyPrototype myPrototype1 = myPrototypeProvider.getObject("Hello from prototype1");
 
+        beanFactory.registerSingleton("myPrototype1", myPrototype1);
 
 
 
@@ -50,8 +52,7 @@ public class BeanConfig implements BeanFactoryPostProcessor {
 
 
 
-//        ObjectProvider<MyPrototype> myPrototypeProvider = beanFactory.getBeanProvider(MyPrototype.class);
-//        final MyPrototype myPrototype = myPrototypeProvider.getObject("hello");
+
 
     }
 }
