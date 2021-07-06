@@ -1,4 +1,4 @@
-package ru.clevertec.logging.starter;
+package ru.clevertec.logging.starter.config;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Bean;
