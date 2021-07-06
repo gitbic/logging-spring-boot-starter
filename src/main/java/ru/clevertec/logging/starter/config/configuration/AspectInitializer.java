@@ -53,6 +53,8 @@ public class AspectInitializer implements BeanFactoryPostProcessor, EnvironmentA
 
         System.out.println("=================");
 
+
+
         beanFactory.registerSingleton(LogMethodExecutionAspect0.class.getSimpleName() + 0,
                 new LogMethodExecutionAspect0(defaultLoggingServiceProperties.getAspectsProperties().get(0)));
 

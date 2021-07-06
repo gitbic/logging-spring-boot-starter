@@ -28,7 +28,8 @@ public class LogMethodExecutionAspect1 {
     }
 
 //    @Pointcut("ru.clevertec.logging.starter.aspect.AspectPointcut.getServicePointcut()")
-    @Pointcut(PointcutPattern.SERVICE_POINTCUT)
+//    @Pointcut(PointcutPattern.SERVICE_POINTCUT)
+    @Pointcut("")
     public void getPointcut() {
     }
 
