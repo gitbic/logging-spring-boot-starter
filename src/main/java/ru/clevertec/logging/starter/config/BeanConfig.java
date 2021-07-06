@@ -1,6 +1,7 @@
 package ru.clevertec.logging.starter.config;
 
 import lombok.RequiredArgsConstructor;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.beans.factory.config.BeanFactoryPostProcessor;
@@ -15,13 +16,18 @@ public class BeanConfig implements BeanFactoryPostProcessor {
     @Override
     public void postProcessBeanFactory(ConfigurableListableBeanFactory beanFactory) throws BeansException {
 
+        beanFactory.registerSingleton("LKnvja", new ModelMapper());
+
+        beanFactory.registerSingleton("myPrototype1", new MyPrototype("Hello"));
+        beanFactory.registerSingleton("myPrototype2", new MyPrototype("Bye"));
+
         //	private final ObjectProvider<MyPrototype> myPrototypeProvider;
 
         ObjectProvider<MyPrototype> myPrototypeProvider = beanFactory.getBeanProvider(MyPrototype.class);
 
-        final MyPrototype myPrototype = myPrototypeProvider.getObject("hello");
-
-        beanFactory.registerSingleton("myPrototype", myPrototype);
+//        final MyPrototype myPrototype = myPrototypeProvider.getObject("hello");
+//
+//        beanFactory.registerSingleton("myPrototype", myPrototype);
 
     }
 }
