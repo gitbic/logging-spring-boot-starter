@@ -1,6 +1,6 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
 ru.clevertec.logging.starter.config.configuration.BeanConfig,\
-ru.clevertec.logging.starter.config.configuration.MyConf
+ru.clevertec.logging.starter.config.properties.loggingServicePropertiesConfig
 
 
 

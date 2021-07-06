@@ -11,6 +11,7 @@ import org.springframework.context.annotation.Configuration;
 import ru.clevertec.logging.starter.aspect.LogMethodExecutionAspect0;
 import ru.clevertec.logging.starter.aspect.LogMethodExecutionAspect1;
 import ru.clevertec.logging.starter.config.constants.Constants;
+import ru.clevertec.logging.starter.entity.AspectProperties;
 import ru.clevertec.logging.starter.entity.LoggingServiceProperties;
 import ru.clevertec.logging.starter.entity.MyPrototype;
 
@@ -22,36 +23,19 @@ public class BeanConfig implements BeanFactoryPostProcessor {
     public void postProcessBeanFactory(ConfigurableListableBeanFactory beanFactory) throws BeansException {
         beanFactory.registerSingleton("LKnvja", new ModelMapper());
 
+        beanFactory.registerSingleton("myPrototype1", new MyPrototype("Hello from prototype1"));
+        beanFactory.registerSingleton("myPrototype2", new MyPrototype("Hello from prototype2"));
 
 
-//        beanFactory.registerSingleton("myPrototype1", new MyPrototype("Hello"));
-//        beanFactory.registerSingleton("myPrototype2", new MyPrototype("Bye"));
+        LoggingServiceProperties defaultLoggingServiceProperties =
+                beanFactory.getBean(Constants.DEFAULT_LOGGING_SERVICE_PROPERTIES_BEAN_NAME, LoggingServiceProperties.class);
+        System.out.println(defaultLoggingServiceProperties);
 
+        AspectProperties aspectProperties0 = defaultLoggingServiceProperties.getAspectsProperties().get(0);
+        AspectProperties aspectProperties1 = defaultLoggingServiceProperties.getAspectsProperties().get(1);
 
-        ObjectProvider<MyPrototype> myPrototypeProvider = beanFactory.getBeanProvider(MyPrototype.class);
-        final MyPrototype myPrototype1 = myPrototypeProvider.getObject("Hello from prototype1");
-
-        beanFactory.registerSingleton("myPrototype1", myPrototype1);
-
-
-
-        //        LoggingServiceProperties defaultLoggingServiceProperties =
-//                beanFactory.getBean(Constants.DEFAULT_LOGGING_SERVICE_PROPERTIES_BEAN_NAME, LoggingServiceProperties.class);
-//        System.out.println(defaultLoggingServiceProperties);
-
-
-
-//        beanFactory.registerSingleton(LogMethodExecutionAspect0.class.getSimpleName() + 0,
-//                new LogMethodExecutionAspect0(defaultLoggingServiceProperties.getAspectsProperties().get(0)));
-//
-//        beanFactory.registerSingleton(LogMethodExecutionAspect0.class.getSimpleName() + 1,
-//                new LogMethodExecutionAspect1(defaultLoggingServiceProperties.getAspectsProperties().get(1)));
-
-
-
-
-
-
+        beanFactory.registerSingleton("LogMethodExecutionAspect0", new LogMethodExecutionAspect0(aspectProperties0));
+        beanFactory.registerSingleton("LogMethodExecutionAspect1", new LogMethodExecutionAspect1(aspectProperties1));
 
 
     }
