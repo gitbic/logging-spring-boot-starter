@@ -1,4 +1,4 @@
-package ru.clevertec.logging.starter.config;
+package ru.clevertec.logging.starter.config.configuration;
 
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.context.annotation.Bean;
