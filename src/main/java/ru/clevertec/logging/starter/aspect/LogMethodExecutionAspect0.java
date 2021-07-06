@@ -25,12 +25,13 @@ public class LogMethodExecutionAspect0 {
 
     public LogMethodExecutionAspect0(AspectProperties aspectProperties) throws NoSuchMethodException, IllegalAccessException, NoSuchFieldException {
         this.aspectProperties = aspectProperties;
-//        changePointcut();
+        changePointcut();
         reflectThis();
     }
 
 //    @Pointcut("ru.clevertec.logging.starter.aspect.AspectPointcut.getControllerPointcut()")
-    @Pointcut(PointcutPattern.CONTROLLER_POINTCUT)
+//    @Pointcut(PointcutPattern.CONTROLLER_POINTCUT)
+    @Pointcut("")
     public void getPointcut() {
     }
 

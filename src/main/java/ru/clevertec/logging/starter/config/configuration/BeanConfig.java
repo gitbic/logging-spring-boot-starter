@@ -35,7 +35,7 @@ public class BeanConfig implements BeanFactoryPostProcessor {
         AspectProperties aspectProperties1 = defaultLoggingServiceProperties.getAspectsProperties().get(1);
 
         beanFactory.registerSingleton("LogMethodExecutionAspect0", new LogMethodExecutionAspect0(aspectProperties0));
-        beanFactory.registerSingleton("LogMethodExecutionAspect1", new LogMethodExecutionAspect1(aspectProperties1));
+        beanFactory.registerSingleton("LogMethodExecutionAspect1", new LogMethodExecutionAspect0(aspectProperties1));
 
 
     }
