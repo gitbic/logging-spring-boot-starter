@@ -27,7 +27,6 @@ public class LogMethodExecutionAspect0 {
     public LogMethodExecutionAspect0(AspectProperties aspectProperties) throws NoSuchMethodException, IllegalAccessException, NoSuchFieldException {
         this.aspectProperties = aspectProperties;
         changePointcut();
-
     }
 
 
@@ -46,34 +45,32 @@ public class LogMethodExecutionAspect0 {
         Pointcut oldPointcut = getPointcutMethod.getAnnotation(Pointcut.class);
         System.out.println("Old pointcut value: " + oldPointcut.value());
 
-//        InvocationHandler invocationHandler = Proxy.getInvocationHandler(oldPointcut);
+        InvocationHandler invocationHandler = Proxy.getInvocationHandler(oldPointcut);
 
 
-        //--
-        Map<String, Object> myValueMap = new LinkedHashMap<>();
-        myValueMap.put("value", newPointcutPattern);
-        Class<? extends Annotation> myAnnotationType = oldPointcut.annotationType();
-        InvocationHandler invocationHandler = new MyAnnotationInvocationHandler(myAnnotationType, myValueMap);
-        //--
-
-
-
-        final Proxy oldPointcutProxy = (Proxy) oldPointcut;
-
-        //--
-        ClassLoader classLoader = oldPointcut.getClass().getClassLoader();
-        Class<?>[] interfaces = oldPointcut.getClass().getInterfaces();
-        Object myProxy = Proxy.newProxyInstance(classLoader, interfaces, invocationHandler);
-
-        System.out.println("Fields of oldPointcutProxy: " + Arrays.toString(oldPointcutProxy.getClass().getDeclaredFields()));
-
-
-        //--
-
-
-        System.out.println("OldPointcutProxy: " + oldPointcutProxy);
+//        //--
+//        Map<String, Object> myValueMap = new LinkedHashMap<>();
+//        myValueMap.put("value", newPointcutPattern);
+//        Class<? extends Annotation> myAnnotationType = oldPointcut.annotationType();
+//        InvocationHandler invocationHandler = new MyAnnotationInvocationHandler(myAnnotationType, myValueMap);
+//        //--
+//
+//
+//
+//        final Proxy oldPointcutProxy = (Proxy) oldPointcut;
+//
+//        //--
+//        ClassLoader classLoader = oldPointcut.getClass().getClassLoader();
+//        Class<?>[] interfaces = oldPointcut.getClass().getInterfaces();
+//        Object myProxy = Proxy.newProxyInstance(classLoader, interfaces, invocationHandler);
+//
+//        System.out.println("Fields of oldPointcutProxy: " + Arrays.toString(oldPointcutProxy.getClass().getDeclaredFields()));
+//
+//
+//        //--
+//        System.out.println("OldPointcutProxy: " + oldPointcutProxy);
+//        System.out.println("Hash code oldPointcutProxy: " + oldPointcutProxy.hashCode());
         System.out.println("Invocation handler: " + invocationHandler);
-        System.out.println("Hash code oldPointcutProxy: " + oldPointcutProxy.hashCode());
         System.out.println("Hash code oldPointcut: " + oldPointcut.hashCode());
         System.out.println("Hash code this class: " + this.hashCode());
         System.out.println("Hash code invocation handler: " + invocationHandler.hashCode());
