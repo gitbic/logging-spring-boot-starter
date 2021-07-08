@@ -14,6 +14,7 @@ import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
 import java.util.Arrays;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 
@@ -26,19 +27,17 @@ public class LogMethodExecutionAspect0 {
     public LogMethodExecutionAspect0(AspectProperties aspectProperties) throws NoSuchMethodException, IllegalAccessException, NoSuchFieldException {
         this.aspectProperties = aspectProperties;
         changePointcut();
-        reflectThis();
+
     }
 
+
 //    @Pointcut("ru.clevertec.logging.starter.aspect.AspectPointcut.getControllerPointcut()")
-    @Pointcut(PointcutPattern.CONTROLLER_POINTCUT)
-//    @Pointcut("")
+//    @Pointcut(PointcutPattern.CONTROLLER_POINTCUT)
+    @Pointcut("")
     public void getPointcut() {
     }
 
-    public void reflectThis() {
-        Method[] declaredMethods = this.getClass().getDeclaredMethods();
-        System.out.println("declaredMethods: " + Arrays.toString(declaredMethods));
-    }
+
 
     public void changePointcut() throws NoSuchMethodException, NoSuchFieldException, IllegalAccessException {
         String newPointcutPattern = aspectProperties.getPattern();
@@ -47,12 +46,37 @@ public class LogMethodExecutionAspect0 {
         Pointcut oldPointcut = getPointcutMethod.getAnnotation(Pointcut.class);
         System.out.println("Old pointcut value: " + oldPointcut.value());
 
-        InvocationHandler invocationHandler = Proxy.getInvocationHandler(oldPointcut);
+//        InvocationHandler invocationHandler = Proxy.getInvocationHandler(oldPointcut);
 
+
+        //--
+        Map<String, Object> myValueMap = new LinkedHashMap<>();
+        myValueMap.put("value", newPointcutPattern);
+        Class<? extends Annotation> myAnnotationType = oldPointcut.annotationType();
+        InvocationHandler invocationHandler = new MyAnnotationInvocationHandler(myAnnotationType, myValueMap);
+        //--
+
+
+
+        final Proxy oldPointcutProxy = (Proxy) oldPointcut;
+
+        //--
+        ClassLoader classLoader = oldPointcut.getClass().getClassLoader();
+        Class<?>[] interfaces = oldPointcut.getClass().getInterfaces();
+        Object myProxy = Proxy.newProxyInstance(classLoader, interfaces, invocationHandler);
+
+        System.out.println("Fields of oldPointcutProxy: " + Arrays.toString(oldPointcutProxy.getClass().getDeclaredFields()));
+
+
+        //--
+
+
+        System.out.println("OldPointcutProxy: " + oldPointcutProxy);
+        System.out.println("Invocation handler: " + invocationHandler);
+        System.out.println("Hash code oldPointcutProxy: " + oldPointcutProxy.hashCode());
         System.out.println("Hash code oldPointcut: " + oldPointcut.hashCode());
         System.out.println("Hash code this class: " + this.hashCode());
         System.out.println("Hash code invocation handler: " + invocationHandler.hashCode());
-
 
         Field field = invocationHandler.getClass().getDeclaredField("memberValues");
         field.setAccessible(true);
