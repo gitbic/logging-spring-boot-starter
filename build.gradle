@@ -3,6 +3,7 @@ plugins {
     id 'io.spring.dependency-management' version '1.0.11.RELEASE'
     id 'java'
     id 'maven-publish'
+    id 'java-library'
 }
 
 group = 'ru.clevertec'
@@ -31,6 +32,13 @@ dependencies {
     annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
 
     compileOnly 'org.modelmapper:modelmapper:2.3.2'
+    // https://mvnrepository.com/artifact/org.jooq/joor-java-8
+    api group: 'org.jooq', name: 'joor-java-8', version: '0.9.14'
+
+    // https://mvnrepository.com/artifact/org.apache.commons/commons-lang3
+    implementation group: 'org.apache.commons', name: 'commons-lang3', version: '3.12.0'
+
+
 }
 
 test {

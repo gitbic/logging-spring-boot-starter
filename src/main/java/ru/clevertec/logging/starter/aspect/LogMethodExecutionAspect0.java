@@ -5,16 +5,13 @@ import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.*;
 import ru.clevertec.logging.starter.config.constants.LoggingMessage;
-import ru.clevertec.logging.starter.config.constants.PointcutPattern;
 import ru.clevertec.logging.starter.entity.AspectProperties;
 
-import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
 import java.util.Arrays;
-import java.util.LinkedHashMap;
 import java.util.Map;
 
 
@@ -23,19 +20,19 @@ import java.util.Map;
 public class LogMethodExecutionAspect0 {
 
     private final AspectProperties aspectProperties;
+    private final String pointcutPattern = "execution(* ru.clevertec..*repository*..*(..))";
 
     public LogMethodExecutionAspect0(AspectProperties aspectProperties) throws NoSuchMethodException, IllegalAccessException, NoSuchFieldException {
         this.aspectProperties = aspectProperties;
-        changePointcut();
+//        changePointcut();
     }
 
 
-//    @Pointcut("ru.clevertec.logging.starter.aspect.AspectPointcut.getControllerPointcut()")
-//    @Pointcut(PointcutPattern.CONTROLLER_POINTCUT)
-    @Pointcut("")
+    //    @Pointcut("ru.clevertec.logging.starter.aspect.AspectPointcut.getControllerPointcut()")
+    @Pointcut(pointcutPattern)
+    //    @Pointcut("execution(* ru.clevertec..*repository*..*(..))")
     public void getPointcut() {
     }
-
 
 
     public void changePointcut() throws NoSuchMethodException, NoSuchFieldException, IllegalAccessException {
@@ -44,6 +41,13 @@ public class LogMethodExecutionAspect0 {
         Method getPointcutMethod = this.getClass().getDeclaredMethod("getPointcut");
         Pointcut oldPointcut = getPointcutMethod.getAnnotation(Pointcut.class);
         System.out.println("Old pointcut value: " + oldPointcut.value());
+
+//        Field value = Pointcut.class.getDeclaredField("value");
+//        value.set(String.class, "член");
+
+//        Method getPointcutMethod2 = this.getClass().getDeclaredMethod("getPointcut");
+//        Pointcut oldPointcut2 = getPointcutMethod2.getAnnotation(Pointcut.class);
+//        System.out.println("Old pointcut value2: " + oldPointcut2.value());
 
         InvocationHandler invocationHandler = Proxy.getInvocationHandler(oldPointcut);
 
