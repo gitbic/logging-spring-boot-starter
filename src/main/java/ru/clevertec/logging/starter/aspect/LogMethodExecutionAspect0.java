@@ -20,7 +20,7 @@ import java.util.Map;
 
 @Slf4j
 @Aspect
-public class LogMethodExecutionAspect0 {
+public class LogMethodExecutionAspect0 extends LogMethodExecutionAspect{
 
     private final AspectProperties aspectProperties;
 
