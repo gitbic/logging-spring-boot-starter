@@ -9,5 +9,4 @@ public class Constants {
     public static final String DEFAULT_LOGGING_SERVICE_PROPERTIES_BEAN_NAME = "defaultLoggingServiceProperties";
     public static final String LOGGING_SERVICE_ASPECT_ENABLED_PROPERTY = "logging-service.enabled";
 
-
 }

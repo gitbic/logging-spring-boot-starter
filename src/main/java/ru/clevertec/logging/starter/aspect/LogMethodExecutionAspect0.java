@@ -4,6 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.*;
+import ru.clevertec.logging.starter.config.constants.Constants;
 import ru.clevertec.logging.starter.config.constants.LoggingMessage;
 import ru.clevertec.logging.starter.config.constants.PointcutPattern;
 import ru.clevertec.logging.starter.entity.AspectProperties;
@@ -19,6 +20,8 @@ import java.util.Map;
 
 
 @Slf4j
+//@Aspect("perthis(ru.clevertec.logging.starter.aspect.LogMethodExecutionAspect0.getPointcut())")
+//@Aspect("perthis(execution(* ru.clevertec..*controller*..*(..)))")
 @Aspect
 public class LogMethodExecutionAspect0 {
 
@@ -26,13 +29,13 @@ public class LogMethodExecutionAspect0 {
 
     public LogMethodExecutionAspect0(AspectProperties aspectProperties) throws NoSuchMethodException, IllegalAccessException, NoSuchFieldException {
         this.aspectProperties = aspectProperties;
-        changePointcut();
+//        changePointcut();
     }
 
 
 //    @Pointcut("ru.clevertec.logging.starter.aspect.AspectPointcut.getControllerPointcut()")
 //    @Pointcut(PointcutPattern.CONTROLLER_POINTCUT)
-    @Pointcut("")
+    @Pointcut(PointcutPattern.DEFAULT_POINTCUT_PATTERN)
     public void getPointcut() {
     }
 
@@ -77,6 +80,7 @@ public class LogMethodExecutionAspect0 {
 
         Field field = invocationHandler.getClass().getDeclaredField("memberValues");
         field.setAccessible(true);
+//        System.out.println("Field memberValues: " + field.get);
 
         Map<String, Object> annotationValues = (Map<String, Object>) field.get(invocationHandler);
         System.out.println("Annotation value before: " + annotationValues);
